@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NEIU Campus Map</title>
+
+    <!-- Include Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+
+    <!-- Include Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+
+    <style>
+        /* Add custom CSS styles for the legend and map container */
+        #map {
+            height: 500px;
+            border: 2px solid #00008B; /* Add a dark blue border to the map */
+            border-radius: 10px; /* Add rounded corners to the map */
+            box-shadow: 3px 3px 3px #888; /* Add a shadow to the map */
+        }
+
+        #legend {
+            position: absolute;
+            bottom: 200px;
+            right: 10px;
+            background: #045a8d;
+			color: white;
+            padding: 10px;
+            border: 1px solid #ccc;
+            z-index: 1000;
+            box-shadow: 3px 3px 3px #888; /* Add a shadow to the legend */
+            border-radius: 10px; /* Add rounded corners to the legend */
+        }
+
+        #legend h3 {
+            margin-top: 0;
+        }
+
+        .legend-item {
+            margin-bottom: 10px;
+        }
+
+        .legend-item img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        /* Style for the title */
+        h1 {
+            text-align: center;
+            background-color: #045a8d;
+			color: white;
+            padding: 10px;
+            margin: 0;
+			border: 1px solid #ccc;
+            z-index: 1000;
+            box-shadow: 3px 3px 3px #888
+			border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Northeastern Illinois University Main Buildings</h1>
+    <div id="map"></div>
+    
+    <!-- Add a map legend with a light gray background -->
+    <div id="legend">
+        <h3>Main Buildings</h3>
+        <div class="legend-item">
+            <img src="classroom.png" alt="Classroom Icon">
+            Classroom
+        </div>
+        <div class="legend-item">
+            <img src="cafeteria.png" alt="Cafeteria Icon">
+            Cafeteria
+        </div>
+        <div class="legend-item">
+            <img src="library.png" alt="Library Icon">
+            Library
+        </div>
+        <div class="legend-item">
+            <img src="parking.png" alt="Parking Icon">
+            Parking Facility
+        </div>
+        <div class="legend-item">
+            <img src="student_union.png" alt="Student Union Icon">
+            Student Union
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var map = L.map('map', {
+            center: [41.980298, -87.718489], // NEIU campus coordinates
+            zoom: 16.4
+        });
+
+        // Add a basemap layer (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var classroomIcon = L.icon({
+            iconUrl: 'classroom.png',
+            iconSize: [38, 38],
+            iconAnchor: [19, 19],
+            popupAnchor: [0, -10]
+        });
+
+        var cafeteriaIcon = L.icon({
+            iconUrl: 'cafeteria.png',
+            iconSize: [38, 38],
+            iconAnchor: [19, 19],
+            popupAnchor: [0, -10]
+        });
+
+        var libraryIcon = L.icon({
+            iconUrl: 'library.png',
+            iconSize: [38, 38],
+            iconAnchor: [19, 19],
+            popupAnchor: [0, -10]
+        });
+
+        var parkingIcon = L.icon({
+            iconUrl: 'parking.png',
+            iconSize: [38, 38],
+            iconAnchor: [19, 19],
+            popupAnchor: [0, -10]
+        });
+
+        var studentUnionIcon = L.icon({
+            iconUrl: 'student_union.png',
+            iconSize: [38, 38],
+            iconAnchor: [19, 19],
+            popupAnchor: [0, -10]
+        });
+		
+        var administrationIcon = L.icon({
+            iconUrl: 'administration.png',
+            iconSize: [38, 38],
+            iconAnchor: [19, 19],
+            popupAnchor: [0, -10]
+        });
+
+        // Add markers with popups
+        var marker1 = L.marker([41.98046326654813, -87.71708889557885], { icon: classroomIcon }).addTo(map);
+        marker1.bindPopup('<strong>BBH Classroom Building</strong><br>Home to G&ES classes. It houses multiple classrooms, faculty offices, and a resource center for students.');
+
+        var marker2 = L.marker([41.98163658440519, -87.71805726632654], { icon: cafeteriaIcon }).addTo(map);
+        marker2.bindPopup('<strong>Cafeteria</strong><br>Enjoy a variety of meals here. The cafeteria offers a wide selection of dishes, including daily specials and vegetarian options.');
+
+        var marker3 = L.marker([41.980332133381644, -87.71909057680199], { icon: libraryIcon }).addTo(map);
+        marker3.bindPopup('<strong>Library</strong><br>A quiet place to study. The library provides access to a vast collection of books, online resources, and study spaces.');
+
+        var marker4 = L.marker([41.981043967080616, -87.72025561730453], { icon: parkingIcon }).addTo(map);
+        marker4.bindPopup('<strong>Parking Facility</strong><br>Convenient parking for students. The parking facility offers ample parking space for students and faculty, making it easy to access campus.');
+
+        var marker5 = L.marker([41.98134823943289, -87.7186287167839], { icon: studentUnionIcon }).addTo(map);
+        marker5.bindPopup('<strong>Student Union</strong><br>Hang out with fellow students. The Student Union is a social hub where students can relax, meet friends, and engage in various activities.');
+
+        var marker6 = L.marker([41.982405267466, -87.71841294564916], { icon: administrationIcon }).addTo(map);
+        marker6.bindPopup('<strong>Administration Building</strong><br>The Administration Building houses the administrative offices of the university, including admissions, financial aid, and registrar offices.');
+    </script>
+</body>
+</html>
